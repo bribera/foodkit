@@ -2,12 +2,11 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import {React, useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import { CiSearch } from "react-icons/ci";
 import { SlBasketLoaded } from "react-icons/sl";
 import { IoExitOutline } from "react-icons/io5";
-import { useRouter } from 'next/navigation'
-import { usePathname, } from 'next/navigation'
+import { usePathname, useRouter} from 'next/navigation'
 
 
  const menu =[
@@ -36,31 +35,29 @@ import { usePathname, } from 'next/navigation'
     const router = useRouter();
     const pathname = usePathname()
 
-    const [haut, setHaut] = useState(false)
+    const [haut, setHaut] = useState(false);
+    
     useEffect(() => {
         const handleScroll = () => {
-            if(window.scrollY > 40) {
-             setHaut(true)
+            if (window.scrollY > 680) {
+                setHaut(true);
             } else {
-                setHaut(false)
+                setHaut(false);
             }
-        }
-        
+        };
 
-        window.addEventListener("scroll", handleScroll)
-        
-        return(() => {
-            window.removeEventListener("scroll", handleScroll)
-        })
-    }, [])
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
 
   return (
 
-        <div className="px-[65px] bg-first lg:px-[130px] lg:py-[28px] h-full">
-            <div className={`haut ?
-                "hidden fixed top-0  bg-first xl:flex items-center justify-between   w-[80vw] " 
-                :"hidden fixed bottom-0  bg-first xl:flex transition duration-300 items-center justify-between w-[80vw]"`}>              
+        <div className="">
+            <div className= {`fixed top-0 px-[65px] lg:px-[130px] lg:py-[20px] w-full z-[99] items-center justify-between transition duration-300 ${haut ? "bg-white" : "bg-first"} xl:flex`}>              
 
                     {/* logo */}
                     <div className="">
@@ -74,7 +71,7 @@ import { usePathname, } from 'next/navigation'
                         <div className="flex items-center  gap-x-[159px] ">
                         {menu.map((item,id) => (
                             <ul className="flex items-center justify-between" key={id}>
-                                <Link href={item.path} className={`${item.path === pathname && 'font-black click'} relative flex justify-center flex-col xl:justify-start items-center group cursor-pointer transition-all duration-300`}>                       
+                                <Link href={item.path} className={`${item.path === pathname && 'font-black text-second click'} relative flex justify-center flex-col xl:justify-start items-center group cursor-pointer transition-all duration-300`}>                       
                                         <span className="text-[22px] font-[500]">{item.nom}</span>                                       
                                 </Link>
                             </ul>
